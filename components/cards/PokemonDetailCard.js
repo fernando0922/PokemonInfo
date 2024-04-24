@@ -26,26 +26,15 @@ const PokemonDetailCard = ({ cardData }) => {
   return (
     <View style={[styles.container, { width: width / 1.1 }]}>
       <View style={[styles.cardHeader, { height: height / 11 }]}>
-        <View
-          style={[
-            styles.typeContainer,
-            { height: height / 11, width: width / 1.6 },
-          ]}
-        ></View>
-        <View style={[styles.hp, { height: height / 11, width: width / 3.8 }]}>
-          <Text>❤️ : {(cardData.maxHp + cardData.minHp) / 2}</Text>
-        </View>
+        <View style={[styles.typeContainer, { width: width / 1.6 }]}></View>
+        <Text style={[styles.hpText, { width: width / 3.8 }]}>
+          ❤️ : {(cardData.maxHp + cardData.minHp) / 2}
+        </Text>
       </View>
       <View style={[styles.cardTitle, { height: height / 12 }]}>
-        <View style={[styles.base]}>
-          <Text>Exp : {cardData.base_experience}</Text>
-        </View>
-        <View style={[styles.height]}>
-          <Text>H : {cardData.height} m</Text>
-        </View>
-        <View style={[styles.weight]}>
-          <Text>W : {cardData.weight} kg</Text>
-        </View>
+        <Text style={styles.info}>Exp : {cardData.base_experience}</Text>
+        <Text style={styles.info}>H : {cardData.height} m</Text>
+        <Text style={styles.info}>W : {cardData.weight} kg</Text>
       </View>
       <View style={[styles.cardImage, { height: height / 3 }]}>
         <Image
@@ -56,24 +45,32 @@ const PokemonDetailCard = ({ cardData }) => {
         />
       </View>
       <View style={[styles.cardInformation, { height: height / 3.5 }]}>
-        <ScrollView>
-          <View style={[styles.moves, { width: width / 2 }]}>
+        <View style={{ width: width / 2 }}>
+          <Text style={styles.movesHeading}>Attacks</Text>
+          <ScrollView>
             {cardData.moves.map((move) => (
-              <Text key={move.move.name}>{move.move.name}</Text>
+              <Text key={move.move.name} style={styles.moves}>
+                {move.move.name}
+              </Text>
             ))}
-          </View>
-        </ScrollView>
-        <View style={[styles.weakness, { width: width / 2.6 }]}>
+          </ScrollView>
+        </View>
+        <View style={{ width: width / 2.6 }}>
+          <Text style={styles.movesHeading}>Weak</Text>
           <ScrollView>
             {damageArray.map((damage) => (
-              <Text key={damage.url}>{damage.name}</Text>
+              <Text key={damage.url} style={styles.weakness}>
+                {damage.name} pokemon
+              </Text>
             ))}
           </ScrollView>
         </View>
       </View>
       <View style={[styles.cardFooter, { height: height / 15 }]}>
         {abilities.map((ability) => (
-          <Text key={ability.ability.name}>{ability.ability.name}</Text>
+          <Text key={ability.ability.name} style={styles.ability}>
+            {ability.ability.name}
+          </Text>
         ))}
       </View>
     </View>
@@ -96,17 +93,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   typeContainer: {},
-  hp: {},
+  hpText: {
+    color: "darkred",
+    fontSize: 24,
+    textAlignVertical: "center",
+  },
   cardTitle: {
     borderColor: "gold",
     borderWidth: 2,
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     alignItems: "center",
   },
-  base: {},
-  height: {},
-  weight: {},
+  info: {
+    color: "midnightblue",
+    fontSize: 20,
+    textTransform: "capitalize",
+    fontWeight: "800",
+  },
   cardImage: {
     borderColor: "gold",
     borderWidth: 2,
@@ -118,14 +122,41 @@ const styles = StyleSheet.create({
     borderColor: "gold",
     borderWidth: 2,
   },
-  moves: {},
-  weakness: {},
+  moves: {
+    color: "#0E6251",
+    fontSize: 20,
+    textTransform: "capitalize",
+    fontWeight: "800",
+    paddingLeft: 32,
+  },
+  movesHeading: {
+    fontSize: 24,
+    textTransform: "uppercase",
+    fontWeight: "800",
+    color: "purple",
+    textDecorationLine: "underline",
+    paddingBottom: 8,
+    paddingLeft: 32,
+  },
+  weakness: {
+    color: "#C70039",
+    fontSize: 20,
+    textTransform: "capitalize",
+    fontWeight: "800",
+    paddingLeft: 32,
+  },
   cardFooter: {
     borderColor: "gold",
     borderWidth: 2,
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     alignItems: "center",
+  },
+  ability: {
+    color: "midnightblue",
+    fontSize: 20,
+    textTransform: "capitalize",
+    fontWeight: "600",
   },
 });
 
