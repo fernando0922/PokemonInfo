@@ -11,7 +11,10 @@ import {
 const PokemonDetailCard = ({ cardData }) => {
   const { height, width } = useWindowDimensions();
 
-  console.log(cardData);
+  const alsoTypesArray =
+    cardData.alsoTypes.length > 2
+      ? cardData.alsoTypes.slice(0, 2)
+      : cardData.alsoTypes;
 
   const abilities =
     cardData.abilities.length > 3
@@ -26,7 +29,13 @@ const PokemonDetailCard = ({ cardData }) => {
   return (
     <View style={[styles.container, { width: width / 1.1 }]}>
       <View style={[styles.cardHeader, { height: height / 11 }]}>
-        <View style={[styles.typeContainer, { width: width / 1.6 }]}></View>
+        <View style={[styles.typeContainer, { width: width / 1.6 }]}>
+          {alsoTypesArray.map((type) => (
+            <Text key={type} style={styles.types}>
+              {type} type
+            </Text>
+          ))}
+        </View>
         <Text style={[styles.hpText, { width: width / 3.8 }]}>
           ❤️ : {(cardData.maxHp + cardData.minHp) / 2}
         </Text>
@@ -92,11 +101,26 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     flexDirection: "row",
   },
-  typeContainer: {},
+  typeContainer: {
+    borderColor: "gold",
+    borderRightWidth: 2,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    flexWrap: "wrap",
+  },
+  types: {
+    color: "purple",
+    fontSize: 24,
+    textTransform: "capitalize",
+    fontWeight: "800",
+    paddingBottom: 2,
+  },
   hpText: {
     color: "darkred",
     fontSize: 24,
     textAlignVertical: "center",
+    fontWeight: "900",
   },
   cardTitle: {
     borderColor: "gold",
@@ -128,6 +152,7 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
     fontWeight: "800",
     paddingLeft: 32,
+    paddingBottom: 10,
   },
   movesHeading: {
     fontSize: 24,
@@ -144,6 +169,7 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
     fontWeight: "800",
     paddingLeft: 32,
+    paddingBottom: 12,
   },
   cardFooter: {
     borderColor: "gold",
