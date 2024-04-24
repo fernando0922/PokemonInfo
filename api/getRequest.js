@@ -47,7 +47,7 @@ export const getPokemonDetailById = async (url) => {
       minHp: stats[0]["base_stat"],
       maxHp: stats[stats.length - 1]["base_stat"],
       alsoTypes: types.map((item) => item.type.name),
-      actualImageUrl: sprites.other["dream_world"]["front_default"],
+      actualImageUrl: sprites.other["official-artwork"]["front_default"],
     };
   } catch (error) {
     console.error("ERROR OCCURED : ");
