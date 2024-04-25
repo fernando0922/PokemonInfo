@@ -42,8 +42,8 @@ const PokemonDetailCard = ({ cardData }) => {
       </View>
       <View style={[styles.cardTitle, { height: height / 12 }]}>
         <Text style={styles.info}>Exp : {cardData.base_experience}</Text>
-        <Text style={styles.info}>H : {cardData.height} m</Text>
-        <Text style={styles.info}>W : {cardData.weight} kg</Text>
+        <Text style={styles.info}>H : {cardData.height}</Text>
+        <Text style={styles.info}>W : {cardData.weight}</Text>
       </View>
       <View style={[styles.cardImage, { height: height / 3 }]}>
         <Image
